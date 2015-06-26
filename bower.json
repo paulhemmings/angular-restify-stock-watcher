@@ -1,0 +1,32 @@
+{
+  "name": "angular-restify-stock-watcher",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.3.14",
+    "angular-route": "~1.3.14",
+    "angular-resource": "~1.3.14",
+    "angular-animate": "~1.3.14",
+    "angular-sanitize": "~1.3.14",
+    "bootstrap": "~3.3.4",
+    "ng-lodash": "~0.2.0",
+    "angular-ui-router": "~0.2.15"
+  },
+  "ignore": [
+    ".bowerrc",
+    ".jshintrc",
+    ".editorconfig",
+    ".gitattributes",
+    "Gruntfile.js",
+    ".gitignore",
+    "*.html",
+    "lib",
+    "test",
+    "tmp"
+  ],
+  "devDependencies": {
+    "angular-mocks": "~1.3.x",
+    "angular-scenario": "~1.3.x"
+  },
+  "appPath": "app"
+}
