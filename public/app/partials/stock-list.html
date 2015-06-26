@@ -10,7 +10,7 @@
   </thead>
   <tbody>
       <tr ng-repeat="key in keys track by $index">
-        <td>{{key}}</td>
+        <td class="stock-key" ng-click='selectKey(key)' ng-class="{true:'selected', false:''}[keySelected(key)]">{{key}}</td>
         <td ng-repeat="stock in stocks track by $index">{{stock[key]}}</td>
       </tr>
   </tbody>

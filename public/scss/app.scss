@@ -7,3 +7,9 @@ h3 {
 h4.error-message {
     color: red;
 }
+.stock-key {
+    font-weight: bold;
+    &.selected {
+      text-decoration: underline;
+    }
+}

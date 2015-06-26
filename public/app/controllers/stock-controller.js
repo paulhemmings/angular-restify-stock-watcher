@@ -8,6 +8,21 @@ angular
             $scope.stocks = [];
             $scope.errorReason = '';
             $scope.keys = [];
+            $scope.sortArray = [];
+
+            // http://www.growingwiththeweb.com/2014/07/order-a-js-array-by-multiple-properties.html
+            // genius script that allows you to order by multiple properties
+
+            function orderByProperty(prop) {
+              var args = Array.prototype.slice.call(arguments, 1);
+              return function (a, b) {
+                var equality = a[prop] - b[prop];
+                if (equality === 0 && arguments.length > 1) {
+                  return orderByProperty.apply(null, args)(a, b);
+                }
+                return equality;
+              };
+            }
 
             function objectToArray(obj) {
                 return Object.keys(obj).map(function (key) {
@@ -54,10 +69,29 @@ angular
                     });
             }
 
+            function keySelected(key) {
+                return $scope.sortArray.indexOf(key) != -1;
+            }
+
+            function selectKey(key) {
+                var pos = $scope.sortArray.indexOf(key);
+                if (pos != -1) {
+                    $scope.sortArray.splice(pos, 1);
+                } else {
+                    $scope.sortArray.push(key);
+                }
+                $scope.stocks.sort(orderByProperty.apply(null, $scope.sortArray));
+                // $scope.stocks.sort(function(lhs, rhs) {
+                //     return lhs[key] - rhs[key];
+                // });
+            }
+
             function initialize() {
               $scope.loadStocks = loadStocks;
               $scope.clearStocks = clearStocks;
               $scope.selectStock = selectStock;
+              $scope.selectKey = selectKey;
+              $scope.keySelected = keySelected;
             }
 
             initialize();
