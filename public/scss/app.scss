@@ -1,14 +1,9 @@
-#new-blog-post, #existing-posts, #archived-blog {
-  input, textarea {
-    width: 100%;
-  }
+.symbol-input {
+    display:inline-block;
 }
-
-#archive-blog-titles {
-  li {
-    cursor: pointer;
-    :hover {
-      border-bottom: solid 1px #eee;
-    }
-  }
+h3 {
+    padding-top:2em;
+}
+h4.error-message {
+    color: red;
 }

@@ -77,7 +77,7 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          '<%= yeoman.dist %>/angular-restify-mongo-blogger.min.js': [
+          '<%= yeoman.dist %>/angular-restify-stock-watcher.min.js': [
             '.tmp/scripts/{,*/}*.js'
           ]
         }
@@ -89,7 +89,7 @@ module.exports = function (grunt) {
       },
       dist: {
         src: '.tmp/scripts/{,*/}*.js',
-        dest: '<%= yeoman.dist %>/angular-restify-mongo-blogger.js',
+        dest: '<%= yeoman.dist %>/angular-restify-stock-watcher.js',
       },
     },
     sass : {
@@ -99,7 +99,7 @@ module.exports = function (grunt) {
                 compass: false
             },
             files: {
-                '<%= yeoman.public %>/styles/blog.css': '<%= yeoman.public %>/scss/blog.scss'
+                '<%= yeoman.public %>/styles/app.css': '<%= yeoman.public %>/scss/app.scss'
             }
         },
         dist: {
@@ -108,7 +108,7 @@ module.exports = function (grunt) {
                 compass: false
             },
             files: {
-                '<%= yeoman.public %>/styles/blog.css': '<%= yeoman.public %>/scss/blog.scss'
+                '<%= yeoman.public %>/styles/app.css': '<%= yeoman.public %>/scss/app.scss'
             }
         }
     },

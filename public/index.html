@@ -13,43 +13,35 @@
 
     <!-- App -->
     <link href="styles/global.css" rel="stylesheet" />
-    <link href="styles/blog.css" rel="stylesheet" />
+    <link href="styles/app.css" rel="stylesheet" />
 
 
 </head>
 <body>
 
+    <div class="app-masthead">
+      <div class="container">
+        <nav class="app-nav">
+          <a class="app-nav-item active" href="#">Home</a>
+        </nav>
+      </div>
+    </div>
 
-      <div class="app-masthead">
-        <div class="container">
-          <nav class="app-nav">
-            <a class="app-nav-item active" href="#">Home</a>
-          </nav>
-        </div>
+    <div class="container">
+
+      <div class="app-header">
+        <h1 class="app-title">Stocker</h1>
+        <p class="lead app-description">Sourced from Yahoo Stocks.</p>
       </div>
 
-      <div class="container">
-
-        <div class="app-header">
-          <h1 class="app-title">Stocker</h1>
-          <p class="lead app-description">Sourced from Yahoo Stocks.</p>
+      <div class="row">
+        <div class="col-sm-12 app-main">
+          <div ui-view="content"></div>
         </div>
 
-        <div class="row">
-          <div class="col-sm-12 app-main">
-            <div ui-view="content"></div>
-          </div>
+      </div><!-- /.row -->
 
-        </div><!-- /.row -->
-
-      </div><!-- /.container -->
-
-      <footer class="app-footer">
-        <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-        <p>
-          <a href="#">Back to top</a>
-        </p>
-      </footer>
+    </div><!-- /.container -->
 
     <!-- App libs -->
     <script src="lib/angular/angular.js"></script>
