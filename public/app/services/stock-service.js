@@ -14,14 +14,11 @@ angular
     .module('MainApplicationModule')
     .service('stockService', [ '$http', '$q', function($http, $q) {
 
-        function validateSymbols(symbols) {
-            var deferred = $q.defer();
-            if (!symbols || symbols.length === 0) {
-                deferred.reject('invalid request');
-            } else {
-                deferred.resolve('valid');
-            }
-            return deferred.promise;
+        function verifyRequest(symbols) {
+          return $http({
+              url: '/stocks/' + symbols + '/verify',
+              method: 'GET'
+          });
         }
 
         function listStocks(symbols) {
@@ -32,7 +29,7 @@ angular
         }
 
         return {
-            validateSymbols: validateSymbols,
+            verifyRequest: verifyRequest,
             listStocks: listStocks
         };
 

@@ -1,43 +1,50 @@
 'use strict';
 
-  var Extensions = require('./../helpers/extensions');
 /*
- * Blog resource
- * Provide endpoints for managing blogs
- * TODO: add a prefilter to all requests for authentication.
+ * Stock resource
+ * Provide endpoints for retrieving stocks
  */
 
-  exports.initialize = function(server, services) {
+ (function(ex) {
 
-    var Context = {
+    var Extensions = require('./../helpers/extensions');
+    var stockService;
 
-        stockService : services.StockService,
+    // verify request is valid
+    // TODO: move to service
 
-        get : function(req, res, next) {
-          console.log('params', req.params);
-          this.stockService.get(req.params.symbols).then(function(quotes) {
-              res.send(200, JSON.parse(quotes));
-              next();
-          }, function(error) {
-            res.send(401, error);
-            next();
-          });
-        }
+    function verifyRequest(req, res, next) {
+       if (!req.params.symbols
+           || req.params.symbols == 'undefined'
+           || req.params.symbols.length == 0) {
+          res.send(405, "not a valid request");
+          next();
+          return;
+       }
+       res.send(200);
+       next();
+    }
 
-    };
+    // retrieve the requested stocks
 
-    /*
-     * Bind service end points to methods
-     */
+    function getStock(req, res, next) {
+       this.stockService.get(req.params.symbols).then(function(quotes) {
+           res.send(200, JSON.parse(quotes));
+           next();
+       }, function(error) {
+         res.send(400, error);
+         next();
+       });
+    }
 
-    server.get('/stocks/:symbols', Extensions.bind(Context.get, Context));
+    // bind methods to service end points
 
-    /*
-     * Expose hidden methods for unit testing.
-     */
+    function initialize(server, services) {
+      this.stockService = services.StockService;
+      server.get('/stocks/:symbols', Extensions.bind(getStock, this));
+      server.get('/stocks/:symbols/verify', Extensions.bind(verifyRequest, this));
+    }
 
-    exports.__test__ = {
-        get: Extensions.bind(Context.get, Context)
-    };
+    ex.initialize = initialize;
 
-  };
+ })(exports);

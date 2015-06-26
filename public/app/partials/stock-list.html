@@ -1,37 +1,22 @@
 <style>
-  ul.stock-table {
-      width:100%;
-  }
-  li {
-    list-style: none;
-  }
-  .stock-key-column {
-      width: 500px;
-      padding:0;
-      margin:0;
-      font-weight: bold;
-  }
-  .symbol-input, .stock-key-column, .stock-value-column, .stock-value-column li {
+  .symbol-input {
       display:inline-block;
-  }
-  .stock-value-column li {
-      padding-left: 1em;
   }
 </style>
 
 <h3>Choose Stock(s)<h4>{{errorReason}}</h4></h3>
 <input class="symbol-input" type='text' ng-model="symbols" />
 <button ng-click='clearStocks();loadStocks(symbols)'>Load</button>
+
 <h3>Stocks</h3>
-<ul class="stock-table">
-    <li ng-repeat="key in keys track by $index">
-        <div class='stock-key-column'>{{key}}</div>
-        <div class='stock-value-column'>
-            <ul>
-                <li ng-repeat="stock in stocks track by $index">
-                    <div class='stock-value'>{{stock[key]}}</div>
-                </li>
-            </ul>
-        </div>
-    </li>
-</ul>
+<table class="table">
+  <thead>
+    <th ng-repeat="s in stocks track by $index"></th>
+  </thead>
+  <tbody>
+      <tr ng-repeat="key in keys track by $index">
+        <td>{{key}}</td>
+        <td ng-repeat="stock in stocks track by $index">{{stock[key]}}</td>
+      </tr>
+  </tbody>
+</table>

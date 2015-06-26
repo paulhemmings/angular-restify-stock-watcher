@@ -34,7 +34,7 @@ angular
 
             function loadStocks(symbols) {
                 workflowService.flow([
-                    workflowService.wait(stockService.validateSymbols, [symbols]),
+                    workflowService.wait(stockService.verifyRequest, [symbols]),
                     workflowService.wait(stockService.listStocks, [symbols])
                 ])
                 .then(function(response) {
@@ -43,7 +43,7 @@ angular
                         return lodash.pluck(objectToArray(stock),'key');
                     }));
                 }, function(reason) {
-                    $scope.errorReason = reason;
+                    $scope.errorReason = reason.data;
                 });
             }
 
