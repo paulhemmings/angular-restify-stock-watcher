@@ -2,8 +2,8 @@
 
 angular
     .module('MainApplicationModule')
-    .controller('StockController', ['$scope', '$rootScope', 'stockService', 'workflowService', 'lodash',
-        function($scope, $rootScope, stockService, workflowService, lodash) {
+    .controller('StockController', ['$scope', '$rootScope', '$location', 'stockService', 'workflowService', 'lodash',
+        function($scope, $rootScope, $location, stockService, workflowService, lodash) {
 
             $scope.stocks = [];
             $scope.errorReason = '';
@@ -41,6 +41,23 @@ angular
                 return lodash.union.apply(this, arrays);
             }
 
+            function splitCamelCase(value) {
+              return value.replace(/([a-z])([A-Z])/g, '$1 $2');
+            }
+
+            function positiveValue(value) {
+                return value.trim().indexOf('-') !== 0;
+            }
+
+            function readSymbolsFromUrl() {
+                $scope.symbols = $location.search()['stock'];
+                return $scope.symbols;
+            }
+
+            function writeSymbolsToUrl(symbols) {
+                $location.path('/stocks').search({'stock': symbols});
+            }
+
             function clearStocks() {
                 $scope.errorReason = '';
                 $scope.stocks.length = 0;
@@ -56,10 +73,11 @@ angular
                     $scope.stocks = objectAsArray(response.data.query.results.quote);
                     $scope.keys = unionArrays($scope.stocks.map(function(stock) {
                         return lodash.pluck(objectToArray(stock),'key');
-                    }));
+                      })).sort();
                 }, function(reason) {
                     $scope.errorReason = reason.data;
                 });
+                return symbols;
             }
 
             function selectStock(stock) {
@@ -86,12 +104,20 @@ angular
                 // });
             }
 
+            function exposeMethods() {
+                $scope.loadStocks = loadStocks;
+                $scope.clearStocks = clearStocks;
+                $scope.selectStock = selectStock;
+                $scope.selectKey = selectKey;
+                $scope.keySelected = keySelected;
+                $scope.writeSymbolsToUrl = writeSymbolsToUrl;
+                $scope.positiveValue = positiveValue;
+                $scope.splitCamelCase = splitCamelCase;
+            }
+
             function initialize() {
-              $scope.loadStocks = loadStocks;
-              $scope.clearStocks = clearStocks;
-              $scope.selectStock = selectStock;
-              $scope.selectKey = selectKey;
-              $scope.keySelected = keySelected;
+                exposeMethods();
+                loadStocks(readSymbolsFromUrl());
             }
 
             initialize();

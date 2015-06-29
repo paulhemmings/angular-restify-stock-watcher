@@ -1,17 +1,20 @@
 <h3>Choose Stock(s)</h3>
 <input class="symbol-input" type='text' ng-model="symbols" />
-<button ng-click='clearStocks();loadStocks(symbols)'>Load</button>
+<button ng-click='writeSymbolsToUrl(symbols);clearStocks();loadStocks(symbols)'>Load</button>
 
 <h3>Stocks</h3>
 <h4 class="error-message">{{errorReason}}</h4>
 <table class="table">
   <thead>
-    <th ng-repeat="s in stocks track by $index"></th>
+    <th>Property</th>
+    <th ng-repeat="s in stocks track by $index">{{s.symbol}}</th>
   </thead>
   <tbody>
       <tr ng-repeat="key in keys track by $index">
-        <td class="stock-key" ng-click='selectKey(key)' ng-class="{true:'selected', false:''}[keySelected(key)]">{{key}}</td>
-        <td ng-repeat="stock in stocks track by $index">{{stock[key]}}</td>
+        <td class="stock-key" ng-click='selectKey(key)' ng-class="{true:'selected', false:''}[keySelected(key)]">
+          <a>{{splitCamelCase(key)}}</a>
+        </td>
+        <td ng-class="{true:'positive', false:'negative'}[positiveValue(stock[key])]" ng-repeat="stock in stocks track by $index">{{stock[key]}}</td>
       </tr>
   </tbody>
 </table>
