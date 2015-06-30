@@ -40,7 +40,7 @@ module.exports = function (grunt) {
           '<%= yeoman.server %>/**/*.js'
         ]
       },
-      all: {
+      client: {
         src: [
           'Gruntfile.js',
           '<%= yeoman.app %>/{,*/}*.js'
@@ -148,8 +148,8 @@ module.exports = function (grunt) {
 
     // Test settings
     karma: {
-      unit: {
-        configFile: 'test/karma.conf.js',
+      client: {
+        configFile: 'test/client/karma.client.config.js',
         singleRun: true
       }
     }

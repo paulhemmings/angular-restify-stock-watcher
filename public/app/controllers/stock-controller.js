@@ -58,6 +58,8 @@ angular
                 $location.path('/stocks').search({'stock': symbols});
             }
 
+
+
             function clearStocks() {
                 $scope.errorReason = '';
                 $scope.stocks.length = 0;
@@ -88,12 +90,12 @@ angular
             }
 
             function keySelected(key) {
-                return $scope.sortArray.indexOf(key) != -1;
+                return $scope.sortArray.indexOf(key) !== -1;
             }
 
             function selectKey(key) {
                 var pos = $scope.sortArray.indexOf(key);
-                if (pos != -1) {
+                if (pos !== -1) {
                     $scope.sortArray.splice(pos, 1);
                 } else {
                     $scope.sortArray.push(key);
@@ -128,7 +130,14 @@ angular
              */
 
             $scope.__test__ = {
-                initialize: initialize
+                initialize: initialize,
+                orderByProperty: orderByProperty,
+                objectToArray: objectToArray,
+                objectAsArray: objectAsArray,
+                splitCamelCase: splitCamelCase,
+                positiveValue: positiveValue,
+                readSymbolsFromUrl: readSymbolsFromUrl,
+                writeSymbolsToUrl: writeSymbolsToUrl
             };
 
         }]);

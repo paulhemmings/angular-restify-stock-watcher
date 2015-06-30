@@ -1,3 +1,4 @@
+'use strict';
 
 /*
  * Handy format filters
@@ -11,10 +12,10 @@ angular
     .filter('removePath', function() {
         return function(input) {
             return input.split('/')[input.split('/').length-1];
-        }
+        };
     })
     .filter('splitCamelCase', function() {
         return function(input) {
-            return value.replace(/([a-z])([A-Z])/g, '$1 $2');
-        }
+            return input.replace(/([a-z])([A-Z])/g, '$1 $2');
+        };
     });

@@ -12,7 +12,7 @@
 
 angular
     .module('MainApplicationModule')
-    .service('stockService', [ '$http', '$q', function($http, $q) {
+    .service('stockService', [ '$http', function($http) {
 
         function verifyRequest(symbols) {
           return $http({
